@@ -1,0 +1,101 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.ArrayList;
+/**
+ * A class representing game called "Chasing bombs".
+ * The aim of the game is for a player to click on a square and hopefully avoid a bomb that is hidden under the square. 
+ * The class provides graphical user interface for the game.
+ * It allows player to gain points, win/lose the game and swap between the difficulty of the game.
+ *
+ * @author Daniel Bielech
+ * @version 12.03.2020
+ */
+public class ChasingBombs extends JFrame
+{      
+
+    /**
+     * Constructor for objects of class ChasingBombs
+     * Run the game and show its GUI on the screen.
+     */
+    public ChasingBombs()
+    {
+        super("Chasing bombs");
+        setSize(850,500); // horizontally, verticall
+        //setResizable(false)
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        makeFrame();
+    }
+    
+    /**
+     * Create the Swing frame and its content.
+     * Initialise the GUI for the game.
+     */
+    public void makeFrame()
+    {
+        /////////////////////CONTENT PANE///////////////////////
+        Container cP = getContentPane(); 
+        //Set horizontal box layout for the content pane(the layer that holds all three main panels)
+        cP.setLayout(new BoxLayout(cP,BoxLayout.X_AXIS));
+               
+        /////////////////////PANELS////////////////////////////
+        //CREATE PANELS
+        JPanel leftPanel = new JPanel(); // left panel - grid layout
+        JPanel middlePanel = new JPanel(); // middle panel - box layout
+        JPanel rightPanel = new JPanel(); // right panel - box layout
+        
+        //SET PANELS LAYOUT 
+        leftPanel.setLayout(new GridLayout(2,5)); //left panel - 2 rows 5 columns grid layout
+        //middle and right panel - vertical box layout
+        middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+      
+        //SET PANELS BACKGROUND COLOR
+        middlePanel.setBackground(Color.red);
+        rightPanel.setBackground(Color.yellow);
+        
+        //SET PREFERRED SIZE
+        //leftPanel.setPreferredSize(new Dimension(200,200));
+        //middlePanel.setPreferredSize(new Dimension(200,200));
+        //rightPanel.setPreferredSize(new Dimension(200,200));
+        
+        //ADD PANELS TO THE CONTENT PANE
+        cP.add(leftPanel);
+        cP.add(middlePanel);
+        cP.add(rightPanel);
+           
+        /////////////////PANELS CONTENT////////////////////        
+        //LEFT PANEL
+        ArrayList<JPanel> squareList = new ArrayList<JPanel>(10);     
+        for(int i=0; i<10; i++) { //Create the board of the game which is the 5x2 grid. 
+            JPanel square = new JPanel();
+            square.setBorder(BorderFactory.createLineBorder(Color.black));
+            leftPanel.add(square);
+            squareList.add(square); //call object - squareList.get(index);
+        }
+        
+        //MIDDLE PANEL
+        JLabel gameOptionsLabel = new JLabel("Game options");
+        JButton playGame = new JButton("Start new game");
+        JButton exitGame = new JButton("Exit");
+        
+        //middlePanel.add(gameOptionsLabel);
+        //middlePanel.add(playGame);
+        //middlePanel.add(exitGame);
+        
+        //RIGHT PANEL
+        JLabel chooseDifficultyLabel = new JLabel("Choose difficulty");
+        JButton difficultyEasy = new JButton("Easy");
+        JButton difficultyIntermediate = new JButton("Intermediate");
+        JButton difficultyDifficult = new JButton("Difficult");
+        
+        //rightPanel.add(chooseDifficultyLabel);
+        //rightPanel.add(difficultyEasy);
+        //rightPanel.add(difficultyIntermediate);
+        //rightPanel.add(difficultyDifficult);
+        
+        
+        //pack();
+        setVisible(true); // make the GUI visible
+    }
+}
